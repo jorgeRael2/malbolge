@@ -104,7 +104,7 @@ void printMalbolgeWord(malbolgeWord word){
 }
 
 int main(){
-	malbolgeWord v0 = uint16ToMalbolgeWord(59049);
+	malbolgeWord v0 = uint16ToMalbolgeWord(59048);
 	printMalbolgeWord(v0);
 	return 0;
 }
