@@ -9,8 +9,9 @@
 //This program should work as same as original.
 //This source code should be easier to understand
 
-#include <stdio.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 //This is a ternary digit
 //Ternary digits can only be 0, 1 or 2
@@ -44,7 +45,7 @@ ternaryDigit initTernaryDigit(){
 
 malbolgeWord initMalbolgeWord(){
 	malbolgeWord word;
-	unsigned int i;
+	int i;
 	for(i = 0; i < 10; i++){
 		word.digit[i] = initTernaryDigit();
 	}
@@ -53,7 +54,7 @@ malbolgeWord initMalbolgeWord(){
 
 malbolgeMemory initMalbolgeMemory(){
 	malbolgeMemory memory;
-	unsigned int i;
+	int i;
 	for(i = 0; i < 59049; i++){
 		memory.word[i] = initMalbolgeWord();
 	}
@@ -69,9 +70,41 @@ malbolgeVirtualMachine initMalbolgeVirtualMachine(){
 	return machine;
 }
 
+malbolgeWord uint8ToMalbolgeWord(uint8_t number){
+	int i;
+	malbolgeWord word;
+	for(i = 0; i < 10; i++){
+		word.digit[i].value = number % 3;
+		number /= 3;
+	}
+	return word;
+}
+
+malbolgeWord uint16ToMalbolgeWord(uint16_t number){
+	if(59049 <= number){
+		printf("Error:\n");
+		printf("Big number (%u) in malbolge word.\n", number);
+		printf("A malbolge word can only hold values from 0 to 59048.");
+		exit(1);
+	}
+	int i;
+	malbolgeWord word;
+	for(i = 0; i < 10; i++){
+		word.digit[i].value = number % 3;
+		number /= 3;
+	}
+	return word;
+}
+
+void printMalbolgeWord(malbolgeWord word){
+	int i;
+	for(i = 9; 0 <= i; i--){
+		printf("%u", word.digit[i].value);
+	}
+}
+
 int main(){
-	malbolgeVirtualMachine machine = initMalbolgeVirtualMachine();
-	FILE *codeFile = fopen("code.mal", "rb");
-	fclose(codeFile);
+	malbolgeWord v0 = uint16ToMalbolgeWord(59049);
+	printMalbolgeWord(v0);
 	return 0;
 }
