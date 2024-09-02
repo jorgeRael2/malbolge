@@ -60,7 +60,17 @@ malbolgeMemory initMalbolgeMemory(){
 	return memory;
 }
 
+malbolgeVirtualMachine initMalbolgeVirtualMachine(){
+	malbolgeVirtualMachine machine;
+	machine.memory = initMalbolgeMemory();
+	machine.a = initMalbolgeWord();
+	machine.c = initMalbolgeWord();
+	machine.d = initMalbolgeWord();
+	return machine;
+}
+
 int main(){
+	malbolgeVirtualMachine machine = initMalbolgeVirtualMachine();
 	FILE *codeFile = fopen("code.mal", "rb");
 	fclose(codeFile);
 	return 0;
