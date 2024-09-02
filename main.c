@@ -18,14 +18,23 @@ typedef struct{
 	uint8_t value;
 } ternaryDigit;
 
-//Malbolge's virtual machine words have 10 ternary digits
+//Malbolge's virtual machine words has 10 ternary digits
 typedef struct{
 	ternaryDigit digit[10];
 } malbolgeWord;
 
+//Malbolge's virtual machine has 59049 words
 typedef struct{
 	malbolgeWord word[59049];
 } malbolgeMemory;
+
+//The virtual machine has 3 registers
+typedef struct{
+	malbolgeMemory memory;
+	malbolgeWord a;
+	malbolgeWord c;
+	malbolgeWord d;
+} malbolgeVirtualMachine;
 
 int main(){
 	return 0;
