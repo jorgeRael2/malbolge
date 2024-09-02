@@ -36,6 +36,32 @@ typedef struct{
 	malbolgeWord d;
 } malbolgeVirtualMachine;
 
+ternaryDigit initTernaryDigit(){
+	ternaryDigit digit;
+	digit.value = 0;
+	return digit;	
+}
+
+malbolgeWord initMalbolgeWord(){
+	malbolgeWord word;
+	unsigned int i;
+	for(i = 0; i < 10; i++){
+		word.digit[i] = initTernaryDigit();
+	}
+	return word;
+}
+
+malbolgeMemory initMalbolgeMemory(){
+	malbolgeMemory memory;
+	unsigned int i;
+	for(i = 0; i < 59049; i++){
+		memory.word[i] = initMalbolgeWord();
+	}
+	return memory;
+}
+
 int main(){
+	FILE *codeFile = fopen("code.mal", "rb");
+	fclose(codeFile);
 	return 0;
 }
